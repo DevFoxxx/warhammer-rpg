@@ -1,0 +1,205 @@
+* {
+    font-family: 'Trajan Pro', serif;
+}
+
+/* Navbar iniziale */
+#navbar {
+    background-color: #1C2A44; /* base dark */
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+/* Navbar scroll - glass effect */
+#navbar.scrolled {
+    background-color: rgba(28, 42, 68, 0.4); /* trasparente */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+#navbar ul li {
+    text-align: center;
+}
+
+/* Link base */
+.navbar-brand, .navbar-nav .nav-link {
+    color: #FFD700; ; /* oro */
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover link */
+.navbar-nav .nav-link:hover {
+    color: #FFD700;
+    transform: scale(1.05);
+}
+
+/* Link attivo - sempre bianco */
+.navbar-nav .nav-link.active {
+    color: #FFFFFF !important;
+    font-weight: bold;
+}
+
+#titoloNavbar {
+    color: #FFD700;
+}
+
+/*  Copertina home */
+#heroes {
+    background: url('../images/heroes.jpg') no-repeat center center/cover;
+    background-size: cover;
+    min-height: 900px;
+    position: relative;
+    display: flex;
+    align-items: center;   /* centra verticalmente */
+    justify-content: center; /* centra orizzontalmente */
+    text-align: center;
+    color: #fff;
+}
+
+#heroes .overlay {
+    background: rgba(22, 35, 56, 0.8); /* trasparente scuro sopra immagine */
+    padding: 30px 50px;
+    border-radius: 12px;
+    max-width: 800px;
+}
+
+#heroes h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #FFD700;
+}
+
+#heroes p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Sezione Regole */
+#regole {
+    background-color: #1C2A44; /* sfondo scuro semi-trasparente */
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+#regole h2 {
+    color: #FFD700; /* oro Warhammer */
+    text-shadow: 1px 1px 5px #000;
+}
+
+#regole .regole-list li {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    text-align: left;
+    position: relative;
+    padding-left: 2rem;
+    color: white;
+}
+
+#regole .regole-list li::before {
+    content: '†'; /* simbolo Warhammerish */
+    position: absolute;
+    left: 0;
+    color: #FFB800;
+}
+
+#overview .card {
+    background-color: #1C2A44; /* sfondo scuro semi-trasparente */
+    border-radius: 15px;
+    padding: 2rem;
+    max-width: 800px;
+    margin: 2rem auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    color: #FFD700; /* oro imperiale */
+    border-radius: 15px;
+    color: white;
+}
+
+#overview .card h2 {
+    color: #FFD700; /* oro Warhammer */
+    text-shadow: 1px 1px 5px #000;
+}
+
+
+/* Footer */
+#footer {
+    background-color: #1C2A44;
+    color: #ffffff;
+}
+
+/* Copertina titolo campagna */
+#campagna-titolo-container {
+    background: url('../images/divinità.jpg') no-repeat center center/cover;
+    min-height: 600px;
+    background-position: top;
+    position: relative;
+    display: flex;
+    align-items: center;        /* centra verticalmente */
+    justify-content: center;    /* centra orizzontalmente */
+    text-align: center;
+    color: #fff;
+    margin-bottom: 2rem;
+}
+
+#campagna-titolo-container .overlay {
+    background: rgba(22, 35, 56, 0.8); /* overlay scuro */
+    padding: 30px 50px;
+    border-radius: 12px;
+    max-width: 800px;
+}
+
+#campagna-titolo-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #FFD700;
+}
+
+#campagna-titolo-container p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+/* Card sessione */
+#sessioni-list .card {
+    background-color: #ffffff; /* grigio scuro / nero */
+    border: 1px solid #1C2A44;
+    color: #000000;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0.5rem;
+}
+
+/* Titolo interno card */
+#sessioni-list .card-title {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Testo interno card */
+#sessioni-list .card-text {
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+/* Sezione Master */
+#login-container button {
+    background-color: #FFD700;
+    border: 1px solid #1C2A44;
+}
+
+#login-container button:hover {
+    background-color: white;
+    border: 1px solid #1C2A44;
+}
