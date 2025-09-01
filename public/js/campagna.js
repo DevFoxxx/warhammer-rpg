@@ -20,7 +20,7 @@ async function fetchCampagna() {
     campagna.sessioni.forEach(s => {
       const div = document.createElement('div');
       // Colonna responsive: tutta larghezza su mobile, 8/12 centrata su tablet/desktop
-      div.className = "col-12 col-md-8 offset-md-2";
+      div.className = "container-fluid";
       div.innerHTML = `
         <div class="card shadow-sm mb-4">
           <div class="card-body">
