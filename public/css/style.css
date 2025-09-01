@@ -69,10 +69,13 @@
     font-weight: bold;
 }
 
+.navbar-nav .nav-link {
+    font-size: clamp(16px, 2vw, 20px);
+}
+
 #titoloNavbar {
+    font-size: clamp(20px, 4vw, 28px);
     color: #FFD700;
-    font-size: 1.8rem; /* leggibile ma non enorme */
-    font-weight: 700;
 }
 
 /* --- Responsività --- */
@@ -131,6 +134,14 @@
 #heroes p {
     font-size: 1.5rem;
     line-height: 1.6;
+}
+
+#heroes h2, #campagna-titolo-container h1, #heroesGlossario h2 {
+    font-size: clamp(24px, 5vw, 36px);
+}
+
+#heroes p, #campagna-titolo-container p, #heroesGlossario p {
+    font-size: clamp(18px, 3vw, 24px);
 }
 
 /* Sezione Regole */
@@ -288,7 +299,6 @@
 }
 
 /* Glossario */
-/*  Copertina home */
 #heroesGlossario {
     background: url('../images/xenos.webp') no-repeat center center/cover;
     background-size: cover;
@@ -322,13 +332,16 @@
     line-height: 1.6;
 }
 
-/* Imposta font-size minimo globale e line-height per leggibilità mobile */
-body {
-    font-size: 20px;       /* dimensione minima */
-    line-height: 1.5;      /* spazio tra le righe */
+#regole .regole-list li,
+#glossarioTesto p,
+dl dd {
+    font-size: clamp(20px, 2.5vw, 22px);
 }
 
-/* Per paragrafi, liste e titoli */
-p, li, span, label, input, textarea, ul li {
-    font-size: 20px;
+body {
+    font-size: clamp(20px, 2vw, 22px);
+    line-height: 1.5;
+}
+p, li, span, label, input, textarea {
+    font-size: clamp(20px, 2.5vw, 22px);
 }
