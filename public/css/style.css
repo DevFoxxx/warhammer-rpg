@@ -182,6 +182,9 @@
     text-shadow: 1px 1px 5px #000;
 }
 
+#overview h4 {
+    color: #FFD700;
+}
 
 /* Footer */
 #footer {
@@ -257,6 +260,19 @@
 #login-container button:hover {
     background-color: white;
     border: 1px solid #1C2A44;
+}
+
+/* fazioni */
+#fazioni {
+    background-color: #1C2A44;
+    min-height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#immagineFazioni {
+    max-height: 500px;
 }
 
 /* Imposta font-size minimo globale e line-height per leggibilità mobile */
