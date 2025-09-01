@@ -103,7 +103,7 @@
 #heroes {
     background: url('../images/heroes.jpg') no-repeat center center/cover;
     background-size: cover;
-    min-height: 900px;
+    min-height: 800px;
     position: relative;
     display: flex;
     align-items: center;   /* centra verticalmente */
@@ -114,13 +114,13 @@
 
 #heroes .overlay {
     background: rgba(22, 35, 56, 0.8); /* trasparente scuro sopra immagine */
-    padding: 30px 50px;
+    padding: 20px 30px;
     border-radius: 12px;
     max-width: 800px;
 }
 
 #heroes h2 {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 15px;
     text-transform: uppercase;
@@ -129,7 +129,7 @@
 }
 
 #heroes p {
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1.6;
 }
 
@@ -137,7 +137,7 @@
 #regole {
     background-color: #1C2A44; /* sfondo scuro semi-trasparente */
     border-radius: 15px;
-    padding: 2rem;
+    padding: 1rem;
     max-width: 800px;
     margin: 2rem auto;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
@@ -149,7 +149,7 @@
 }
 
 #regole .regole-list li {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 1rem;
     line-height: 1.6;
     text-align: left;
@@ -240,14 +240,14 @@
 /* Titolo interno card */
 #sessioni-list .card-title {
     color: #000000;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
 }
 
 /* Testo interno card */
 #sessioni-list .card-text {
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1.4;
 }
 
@@ -271,17 +271,64 @@
     align-items: center;
 }
 
+#glossarioTesto {
+    padding: 1rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+#glossarioTesto h2 {
+    text-align: center;
+    color: #FFD700;
+    text-shadow: 1px 1px 2px #000;
+}
+
 #immagineFazioni {
     max-height: 500px;
 }
 
+/* Glossario */
+/*  Copertina home */
+#heroesGlossario {
+    background: url('../images/xenos.webp') no-repeat center center/cover;
+    background-size: cover;
+    min-height: 500px;
+    position: relative;
+    display: flex;
+    align-items: center;   /* centra verticalmente */
+    justify-content: center; /* centra orizzontalmente */
+    text-align: center;
+    color: #fff;
+}
+
+#heroesGlossario .overlay {
+    background: rgba(22, 35, 56, 0.8); /* trasparente scuro sopra immagine */
+    padding: 30px 50px;
+    border-radius: 12px;
+    max-width: 800px;
+}
+
+#heroesGlossario h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #FFD700;
+}
+
+#heroesGlossario p {
+    font-size: 2rem;
+    line-height: 1.6;
+}
+
 /* Imposta font-size minimo globale e line-height per leggibilità mobile */
 body {
-    font-size: 30px;       /* dimensione minima */
+    font-size: 20px;       /* dimensione minima */
     line-height: 1.5;      /* spazio tra le righe */
 }
 
 /* Per paragrafi, liste e titoli */
 p, li, span, label, input, textarea, ul li {
-    font-size: 30px;
+    font-size: 20px;
 }
