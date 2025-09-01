@@ -359,6 +359,110 @@ p, li, span, label, input, textarea, dd {
   line-height: 1.6;
 }
 
+/* Heroes PG */
+
+#heroesPG {
+  background: url('../images/chaosPG.jpg') no-repeat center center/cover;
+  background-size: cover;
+  min-height: 800px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+}
+
+#heroesPG .overlay {
+  background: var(--overlay);
+  padding: 30px 50px;
+  border-radius: 12px;
+  max-width: 800px;
+}
+
+#heroesPG h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+
+#heroesPG p {
+  font-size: 2rem;
+  line-height: 1.6;
+}
+
+/* PG */
+
+#pg-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem; /* spazio tra le card */
+  max-width: 1000px;
+  margin: 2rem auto; /* centra il contenitore */
+  padding: 0 1rem; /* margine interno su mobile */
+  justify-items: center; /* centra le card all’interno della griglia */
+}
+
+.pg-card {
+  background-color: #1C2A44;
+  border: 2px solid #FFD700;
+  padding: 1rem;
+  color: white;
+  font-family: 'Trajan Pro', serif;
+  line-height: 1.5;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%; /* per farle occupare tutta la colonna disponibile */
+  max-width: 300px; /* larghezza massima della card */
+}
+
+.pg-card h3 {
+  font-size: clamp(20px, 2.5vw, 24px);
+  margin-bottom: 0.5rem;
+  color: #FFD700;
+}
+
+.pg-card p {
+  font-size: clamp(16px, 2.5vw, 18px);
+  margin: 0.3rem 0;
+}
+
+.pg-backstory {
+  background-color: rgba(28, 42, 68, 0.8);
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  font-size: clamp(14px, 2.5vw, 16px);
+  white-space: normal;
+  word-wrap: break-word;
+  border-left: 3px solid #FFD700;
+}
+
+/* Hover effetto leggero */
+.pg-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.5);
+}
+
+/* Mobile: griglia più compatta */
+@media (max-width: 600px) {
+  #pg-cards {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 0 0.5rem;
+  }
+}
+
+
+/* Responsive: su mobile card più strette */
+@media (max-width: 600px) {
+  .pg-card {
+    width: 90%;
+  }
+}
+
+
 /* ---------------------------
    Tipografia globale: base e ereditarietà
    (mantengo la tua preferenza per caratteri grandi)
@@ -398,6 +502,7 @@ h1, h2, h3, h4 {
 /* Limito larghezza overlay per evitare testo troppo grande su hero */
 #heroes .overlay,
 #campagna-titolo-container .overlay,
+#heroesPG .overlay,
 #heroesGlossario .overlay {
   max-width: 720px;          /* contenitore più stretto */
   padding: 18px 24px;        /* padding leggermente ridotto */
@@ -406,6 +511,7 @@ h1, h2, h3, h4 {
 /* Titoli nelle copertine: meno aggressivi rispetto alla base */
 #heroes h2,
 #campagna-titolo-container h1,
+#heroesPG h2,
 #heroesGlossario h2 {
   /* minimo più basso, crescita più dolce, massimo contenuto */
   font-size: clamp(20px, 4.2vw, 32px) !important;
@@ -416,6 +522,7 @@ h1, h2, h3, h4 {
 /* Paragrafi nelle copertine: leggibili ma non enormi */
 #heroes p,
 #campagna-titolo-container p,
+#heroesPG p,
 #heroesGlossario p {
   font-size: clamp(14px, 3.6vw, 18px) !important;
   line-height: 1.5;
@@ -460,12 +567,14 @@ h1, h2, h3, h4 {
 
   #heroes h2,
   #campagna-titolo-container h1,
+  #heroesPG h2,
   #heroesGlossario h2 {
     font-size: clamp(18px, 5.2vw, 26px) !important;
   }
 
   #heroes p,
   #campagna-titolo-container p,
+  #heroesPG p,
   #heroesGlossario p {
     font-size: clamp(15px, 4.2vw, 16px) !important;
   }
@@ -477,3 +586,4 @@ h1, h2, h3, h4 {
   #titoloNavbar { font-size: clamp(16px, 5vw, 22px) !important; }
   .navbar-toggler { padding: 0.25rem 0.4rem !important; }
 }
+
