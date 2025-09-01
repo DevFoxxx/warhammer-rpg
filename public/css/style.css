@@ -43,6 +43,7 @@
 
 #titoloNavbar {
     color: #FFD700;
+    font-size: 35px;
 }
 
 /*  Copertina home */
@@ -75,7 +76,7 @@
 }
 
 #heroes p {
-    font-size: 1.2rem;
+    font-size: 2rem;
     line-height: 1.6;
 }
 
@@ -95,7 +96,7 @@
 }
 
 #regole .regole-list li {
-    font-size: 1.1rem;
+    font-size: 2rem;
     margin-bottom: 1rem;
     line-height: 1.6;
     text-align: left;
@@ -166,7 +167,7 @@
 }
 
 #campagna-titolo-container p {
-    font-size: 1.2rem;
+    font-size: 2rem;
     line-height: 1.6;
 }
 
@@ -183,13 +184,14 @@
 /* Titolo interno card */
 #sessioni-list .card-title {
     color: #000000;
+    font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
 }
 
 /* Testo interno card */
 #sessioni-list .card-text {
-    font-size: 0.9rem;
+    font-size: 2rem;
     line-height: 1.4;
 }
 
@@ -202,4 +204,15 @@
 #login-container button:hover {
     background-color: white;
     border: 1px solid #1C2A44;
+}
+
+/* Imposta font-size minimo globale e line-height per leggibilità mobile */
+body {
+    font-size: 30px;       /* dimensione minima */
+    line-height: 1.5;      /* spazio tra le righe */
+}
+
+/* Per paragrafi, liste e titoli */
+p, li, span, label, input, textarea, ul li {
+    font-size: 30px;
 }
