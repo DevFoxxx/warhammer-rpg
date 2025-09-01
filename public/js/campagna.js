@@ -9,11 +9,11 @@ async function fetchCampagna() {
       return;
     }
 
-    const campagna = campagne[0];
-    document.getElementById('campagna-titolo').textContent = campagna.titolo;
-
     const list = document.getElementById('sessioni-list');
     list.innerHTML = '';
+
+    const campagna = campagne[0];
+    document.getElementById('campagna-titolo').textContent = campagna.titolo;
 
     if (!campagna.sessioni) campagna.sessioni = [];
 
@@ -22,7 +22,7 @@ async function fetchCampagna() {
       // Colonna responsive: tutta larghezza su mobile, 8/12 centrata su tablet/desktop
       div.className = "container-fluid";
       div.innerHTML = `
-        <div class="card shadow-sm mb-4">
+        <div class="card">
           <div class="card-body">
             <h5 class="card-title">Sessione ${s.numero} - ${new Date(s.data).toLocaleDateString()}</h5>
             <p class="card-text">${s.descrizione}</p>

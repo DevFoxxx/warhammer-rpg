@@ -1,8 +1,33 @@
 /* ---------------------------
    Global reset & font fallback
    --------------------------- */
-html { box-sizing: border-box; }
-*, *::before, *::after { box-sizing: inherit; }
+/* 1) prevenire ridimensionamenti strani su iOS */
+html, body {
+  -webkit-text-size-adjust: 100%; /* evita riduzioni automatiche su Safari iOS */
+  text-size-adjust: 100%;
+}
+
+/* 2) base solida: applica il font-size sul root (html) */
+html {
+  font-size: clamp(20px, 5vw, 26px); /* fornisce un riferimento uniforme per rem/em */
+}
+
+/* 3) fallback coerente: fatti ereditare da html */
+body {
+  font-size: 1rem; /* 1rem ora corrisponde a html font-size */
+  line-height: 1.6;
+}
+
+/* 4) default per i testi (ereditano) */
+p, li, span, label, input, textarea, dd {
+  font-size: inherit;
+}
+
+/* 5) navbar e link (per sicurezza) */
+.navbar-nav .nav-link {
+  font-size: clamp(18px, 4.5vw, 22px);
+}
+#titoloNavbar { font-size: clamp(20px, 4.5vw, 28px); }
 
 /* Font: Trajan Pro se disponibile, altrimenti fallback serif */
 * {
@@ -84,7 +109,7 @@ html { box-sizing: border-box; }
 
 /* Titolo navbar */
 #titoloNavbar {
-  font-size: clamp(20px, 4vw, 28px);
+  font-size: clamp(20px, 4vw, 22px);
   color: var(--gold);
 }
 
@@ -205,7 +230,7 @@ html { box-sizing: border-box; }
    --------------------------- */
 #campagna-titolo-container {
   background: url('../images/divinità.jpg') no-repeat center center/cover;
-  min-height: 500px;
+  min-height: 600px;
   background-position: top;
   position: relative;
   display: flex;
@@ -242,22 +267,20 @@ html { box-sizing: border-box; }
    --------------------------- */
 #sessioni-list .card {
   background-color: #ffffff;
-  border: 1px solid var(--bg-dark);
+  border: transparent;
   color: #000000;
   padding: 1rem;
   border-radius: 0.5rem;
-  margin: 1rem;
 }
 
 #sessioni-list .card-title {
   color: #000000;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
-  margin-bottom: 0.5rem;
 }
 
 #sessioni-list .card-text {
-  font-size: 1.5rem;
+  font-size: 1rem;
   line-height: 1.4;
 }
 
@@ -279,8 +302,9 @@ html { box-sizing: border-box; }
    --------------------------- */
 #fazioni {
   background-color: var(--bg-dark);
-  min-height: 600px;
   display: flex;
+  padding-top: 30px;
+  padding-bottom: 30px;
   justify-content: center;
   align-items: center;
 }
@@ -367,4 +391,89 @@ h1, h2, h3, h4 {
   body { font-size: 20px; } /* tutela device ultra-small */
   #navbar { padding: 0.6rem; }
   #titoloNavbar { font-size: clamp(18px, 6vw, 26px); }
+}
+
+/* ---------- Override finale: ridimensionamenti mirati ---------- */
+
+/* Limito larghezza overlay per evitare testo troppo grande su hero */
+#heroes .overlay,
+#campagna-titolo-container .overlay,
+#heroesGlossario .overlay {
+  max-width: 720px;          /* contenitore più stretto */
+  padding: 18px 24px;        /* padding leggermente ridotto */
+}
+
+/* Titoli nelle copertine: meno aggressivi rispetto alla base */
+#heroes h2,
+#campagna-titolo-container h1,
+#heroesGlossario h2 {
+  /* minimo più basso, crescita più dolce, massimo contenuto */
+  font-size: clamp(20px, 4.2vw, 32px) !important;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+/* Paragrafi nelle copertine: leggibili ma non enormi */
+#heroes p,
+#campagna-titolo-container p,
+#heroesGlossario p {
+  font-size: clamp(14px, 3.6vw, 18px) !important;
+  line-height: 1.5;
+  margin: 0.4em 0;
+}
+
+/* Navbar: testo link e titolo più contenuti su mobile/desktop */
+.navbar-nav .nav-link {
+  font-size: clamp(15px, 3.2vw, 18px) !important;
+  padding: 0.35rem 0.6rem;
+}
+
+/* Titolo navbar leggermente ridotto rispetto al resto */
+#titoloNavbar {
+  font-size: clamp(18px, 3.8vw, 24px) !important;
+  line-height: 1;
+}
+
+/* Bottone menu (hamburger / toggler) più compatto */
+.navbar-toggler,
+.navbar-toggler:focus,
+.navbar-toggler:active {
+  padding: 0.35rem 0.5rem !important;
+  font-size: clamp(14px, 3.2vw, 18px) !important;
+  line-height: 1 !important;
+}
+
+/* Se il bottone è custom (es. #login-container button) */
+#login-container button {
+  padding: 0.5rem 0.8rem !important;
+  font-size: clamp(14px, 3.2vw, 18px) !important;
+}
+
+/* Per smartphone molto piccoli: ulteriore riduzione per evitare overflow */
+@media (max-width: 420px) {
+  #heroes .overlay,
+  #campagna-titolo-container .overlay,
+  #heroesGlossario .overlay {
+    max-width: 92%;
+    padding: 14px 16px;
+  }
+
+  #heroes h2,
+  #campagna-titolo-container h1,
+  #heroesGlossario h2 {
+    font-size: clamp(18px, 5.2vw, 26px) !important;
+  }
+
+  #heroes p,
+  #campagna-titolo-container p,
+  #heroesGlossario p {
+    font-size: clamp(15px, 4.2vw, 16px) !important;
+  }
+
+  .navbar-nav .nav-link {
+    font-size: clamp(14px, 4.2vw, 16px) !important;
+  }
+
+  #titoloNavbar { font-size: clamp(16px, 5vw, 22px) !important; }
+  .navbar-toggler { padding: 0.25rem 0.4rem !important; }
 }
