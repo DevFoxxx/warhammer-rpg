@@ -40,7 +40,7 @@ p, li, span, label, input, textarea, dd {
 :root {
   --gold: #FFD700;
   --bg-dark: #1C2A44;
-  --overlay: rgba(22,35,56,0.8);
+  --overlay: rgba(100, 27, 27, 0.8);
 }
 
 /* ---------------------------
@@ -304,14 +304,14 @@ p, li, span, label, input, textarea, dd {
   background-color: var(--bg-dark);
   display: flex;
   padding-top: 30px;
-  padding-bottom: 30px;
+  padding-bottom: 70px;
   justify-content: center;
   align-items: center;
 }
 
 #glossarioTesto {
   padding: 1rem;
-  text-align: center;
+  text-align: left;
   font-size: clamp(18px, 3.5vw, 22px);
 }
 
@@ -323,6 +323,11 @@ p, li, span, label, input, textarea, dd {
 
 #immagineFazioni {
   max-height: 500px;
+}
+
+#glossarioTesto h2,
+#divinita h2 {
+  scroll-margin-top: 70px;
 }
 
 /* Glossario copertina (mantengo url) */
@@ -357,6 +362,62 @@ p, li, span, label, input, textarea, dd {
 #heroesGlossario p {
   font-size: 2rem;
   line-height: 1.6;
+}
+
+/* --- Sezione Muro dei Caduti --- */
+#muro-dei-caduti {
+  padding: 2rem 1rem;
+  text-align: center;
+  color: white;
+}
+
+#muro-dei-caduti h2 {
+  font-size: clamp(22px, 4vw, 28px);
+  color: #FFD700;
+  margin-bottom: 2rem;
+  text-shadow: 1px 1px 3px black;
+}
+
+/* Griglia adattabile */
+.caduti-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  justify-items: center;
+}
+
+/* Card senza bordi né ombre */
+.caduto-card {
+  width: 100%;
+  max-width: 160px;
+}
+
+/* Lapide */
+.lapide {
+  background-image: url("../images/lapide.png");
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: flex-start; /* testo in cima */
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+/* Epitaffio con croce + nome */
+.epitaffio {
+  text-align: center;
+  padding-top: 30px;
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  text-shadow: 1px 1px 1px black;
+  margin-top: 0.3rem;
+}
+
+.epitaffio .nome {
+  display: block;
+  margin-top: 0.2rem;
 }
 
 /* Heroes PG */
@@ -444,6 +505,72 @@ p, li, span, label, input, textarea, dd {
   transform: translateY(-5px);
   box-shadow: 0 0 15px 3px rgba(255, 215, 0, 0.5);
 }
+
+/* Glossario Indice */
+
+#glossarioIndice li a {
+    color: #2e446d;
+}
+
+#glossarioIndice li a:hover {
+    color: #FFD700;
+}
+
+/* --- Sezione Termini Centrali (estesa) --- */
+#termini-centrali {
+  color: rgb(0, 0, 0);
+  font-family: 'Trajan Pro', serif;
+}
+
+/* griglia bootstrap + our card style */
+.termine-card {
+  padding: 1.4rem;
+  border-radius: 10px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  min-height: 230px; /* per allineare visivamente le card */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+#termini-centrali {
+    background-color: #1C2A44;
+    background-position: center;
+    color: white;
+    padding: 20px;
+}
+
+#termini-centrali h2 {
+    color: #FFD700;
+    text-shadow: 1px 1px 1px black;
+}
+
+.termine-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(255, 215, 0, 0.16);
+}
+
+.termine-card h3 {
+  color: #FFD700;
+text-shadow: 0.5px 0.5px 0.5px black;
+  margin-bottom: 0.6rem;
+  font-size: clamp(18px, 2.6vw, 22px);
+}
+
+.termine-card p {
+  font-size: clamp(15px, 2.2vw, 17px);
+  line-height: 1.55;
+  color: #000000;
+  margin: 0;
+}
+
+/* mobile: rendi le card più compatte */
+@media (max-width: 576px) {
+  .termine-card { min-height: auto; padding: 1rem; }
+  .termine-card p { font-size: clamp(14px, 3.2vw, 15px); }
+}
+
 
 /* Mobile: griglia più compatta */
 @media (max-width: 600px) {
