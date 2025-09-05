@@ -103,9 +103,63 @@
           <button type="button" id="modifica-cancel" class="btn btn-secondary">Annulla</button>
         </form>
       </div>
+      <hr>
+      <!-- PANNELLO PG -->
+      <h5 class="mt-5 mb-3">Gestione PG</h5>
+
+    <!-- Form Aggiungi PG -->
+    <form id="pg-add-form" class="mb-4">
+      <div class="mb-3">
+        <label for="pg-nome-add" class="form-label">Nome</label>
+        <input type="text" id="pg-nome-add" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label for="pg-archetype-add" class="form-label">Archetipo</label>
+        <input type="text" id="pg-archetype-add" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="pg-career-add" class="form-label">Specie</label>
+        <input type="text" id="pg-career-add" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="pg-background-add" class="form-label">Background</label>
+        <textarea id="pg-background-add" class="form-control"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Aggiungi PG</button>
+    </form>
+
+    <!-- Form Modifica PG -->
+    <div id="pg-edit-container" class="mb-4 d-none">
+      <form id="pg-edit-form">
+        <input type="hidden" id="pg-id-edit">
+        <div class="mb-3">
+          <label for="pg-nome-edit" class="form-label">Nome</label>
+          <input type="text" id="pg-nome-edit" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="pg-archetype-edit" class="form-label">Archetipo</label>
+          <input type="text" id="pg-archetype-edit" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="pg-career-edit" class="form-label">Specie</label>
+          <input type="text" id="pg-career-edit" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="pg-background-edit" class="form-label">Background</label>
+          <textarea id="pg-background-edit" class="form-control"></textarea>
+        </div>
+        <button type="submit" class="btn btn-warning">Salva Modifiche</button>
+        <button type="button" id="pg-edit-cancel" class="btn btn-secondary">Annulla</button>
+      </form>
+    </div>
+
+    <!-- Lista PG -->
+    <div id="pg-list" class="row g-3"></div>
+
+
+    </main>
 
     </div>
-  </main>
 
   <!-- Footer -->
   <footer id="footer" class="py-3 mt-5 text-center">

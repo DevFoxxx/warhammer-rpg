@@ -1,25 +1,29 @@
 async function loadPG() {
-  const res = await fetch('/pg'); // endpoint che restituisce tutti i PG
+  const res = await fetch('/pg');
   const pgList = await res.json();
 
-  const container = document.getElementById('pg-list');
+  const container = document.getElementById('pg-cards');
   container.innerHTML = '';
 
   pgList.forEach(pg => {
     const div = document.createElement('div');
-    div.className = "col-12 col-md-6 col-lg-4"; // 1 colonna su mobile, 2 su tablet, 3 su desktop
+    div.className = "pg-card"; // usa la classe CSS
     div.innerHTML = `
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <h5 class="card-title">${pg.nome}</h5>
-          <p class="card-text"><strong>Classe:</strong> ${pg.classe}</p>
-          <p class="card-text"><strong>Razza:</strong> ${pg.razza}</p>
-          <p class="card-text"><strong>Livello:</strong> ${pg.livello}</p>
-        </div>
-      </div>
+      <h3>${pg.nome}</h3>
+      <p><strong>Archetipo:</strong> ${pg.archetype || '-'}</p>
+      <p><strong>Specie:</strong> ${pg.career || '-'}</p>
+      <div class="pg-backstory">${pg.background || ''}</div>
     `;
     container.appendChild(div);
   });
 }
 
+// Carica i PG al caricamento della pagina
 loadPG();
+
+window.addEventListener('storage', (e) => {
+    if (e.key === 'refreshPG') {
+        loadPG(); // ricarica i PG automaticamente
+    }
+});
+

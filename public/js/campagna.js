@@ -17,6 +17,9 @@ async function fetchCampagna() {
 
     if (!campagna.sessioni) campagna.sessioni = [];
 
+    // Ordina le sessioni per numero ascendente
+    campagna.sessioni.sort((a, b) => a.numero - b.numero);
+
     campagna.sessioni.forEach(s => {
       const div = document.createElement('div');
       // Colonna responsive: tutta larghezza su mobile, 8/12 centrata su tablet/desktop

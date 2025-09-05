@@ -19,6 +19,7 @@ document.getElementById('login-form').addEventListener('submit', async e => {
       document.getElementById('master-panel').classList.remove('d-none');
       document.getElementById('master-name').textContent = `Master: ${username}`;
       loadCampagne();
+      loadPG();
     } else {
       alert(data.error || 'Errore login');
     }
@@ -155,3 +156,115 @@ document.getElementById('modifica-form').addEventListener('submit', async e => {
 
 // CAMBIO CAMPAGNA
 document.getElementById('campagnaId').addEventListener('change', e => loadSessioni(e.target.value));
+
+// CARICA PG
+async function loadPG() {
+  const list = document.getElementById('pg-list');
+  list.innerHTML = '';
+  try {
+    const res = await fetch('/pg', {
+      headers: { 'Authorization': `Bearer ${masterToken}` }
+    });
+    const pgList = await res.json();
+    pgList.forEach(pg => {
+      const div = document.createElement('div');
+      div.className = "col-12 col-md-6 col-lg-4";
+      div.innerHTML = `
+        <div class="card h-100 border-dark" style="background-color:white; color:black;">
+          <div class="card-body">
+            <h5 class="card-title">${pg.nome}</h5>
+            <p><strong>Archetipo:</strong> ${pg.archetype || '-'}</p>
+            <p><strong>Specie:</strong> ${pg.career || '-'}</p>
+            <div class="pg-backstory" style="background-color: white; color: black; border-left: none;">${pg.background || ''}</div>
+            <div class="mt-2">
+              <button class="btn btn-warning btn-sm me-1" onclick="startEditPG('${pg._id}','${pg.nome}','${pg.archetype}','${pg.career}','${pg.background}')">Modifica</button>
+              <button class="btn btn-danger btn-sm" onclick="deletePG('${pg._id}')">Elimina</button>
+            </div>
+          </div>
+        </div>
+      `;
+      list.appendChild(div);
+    });
+  } catch (err) { console.error(err); }
+}
+
+// AGGIUNGI PG
+document.getElementById('pg-add-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const pgData = {
+    nome: document.getElementById('pg-nome-add').value,
+    archetype: document.getElementById('pg-archetype-add').value,
+    career: document.getElementById('pg-career-add').value,
+    background: document.getElementById('pg-background-add').value
+  };
+  try {
+    const res = await fetch('/pg', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${masterToken}` },
+      body: JSON.stringify(pgData)
+    });
+    if (res.ok) {
+      document.getElementById('pg-add-form').reset();
+      loadPG();
+      localStorage.setItem('refreshPG', Date.now());
+    } else {
+      const data = await res.json();
+      alert(data.error || 'Errore PG');
+    }
+  } catch (err) { alert(err.message); }
+});
+
+// INIZIA MODIFICA PG
+function startEditPG(id, nome, archetype, career, background) {
+  document.getElementById('pg-edit-container').classList.remove('d-none');
+  document.getElementById('pg-id-edit').value = id;
+  document.getElementById('pg-nome-edit').value = nome;
+  document.getElementById('pg-archetype-edit').value = archetype;
+  document.getElementById('pg-career-edit').value = career;
+  document.getElementById('pg-background-edit').value = background;
+}
+
+// CANCELLA MODIFICA
+document.getElementById('pg-edit-cancel').addEventListener('click', () => {
+  document.getElementById('pg-edit-container').classList.add('d-none');
+  document.getElementById('pg-edit-form').reset();
+});
+
+// SALVA MODIFICA PG
+document.getElementById('pg-edit-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const id = document.getElementById('pg-id-edit').value;
+  const pgData = {
+    nome: document.getElementById('pg-nome-edit').value,
+    archetype: document.getElementById('pg-archetype-edit').value,
+    career: document.getElementById('pg-career-edit').value,
+    background: document.getElementById('pg-background-edit').value
+  };
+  try {
+    const res = await fetch(`/pg/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${masterToken}` },
+      body: JSON.stringify(pgData)
+    });
+    if (res.ok) {
+      document.getElementById('pg-edit-form').reset();
+      document.getElementById('pg-edit-container').classList.add('d-none');
+      loadPG();
+      localStorage.setItem('refreshPG', Date.now());
+    } else {
+      const data = await res.json();
+      alert(data.error || 'Errore aggiornamento');
+    }
+  } catch (err) { alert(err.message); }
+});
+
+// ELIMINA PG
+async function deletePG(id) {
+  if (confirm('Sei sicuro di voler eliminare questo PG?')) {
+    await fetch(`/pg/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${masterToken}` } });
+    loadPG();
+  }
+}
+
+// CARICA PG all'inizio
+loadPG();
