@@ -122,11 +122,24 @@
         <input type="text" id="pg-career-add" class="form-control">
       </div>
       <div class="mb-3">
+        <label for="pg-divinita-add" class="form-label">Divinità</label>
+        <select id="pg-divinita-add" class="form-select">
+          <option value="Indiviso">Indiviso</option>
+          <option value="Khorne">Khorne</option>
+          <option value="Nurgle">Nurgle</option>
+          <option value="Slaanesh">Slaanesh</option>
+          <option value="Tzeentch">Tzeentch</option>
+        </select>
+      </div>
+      <div class="mb-3">
         <label for="pg-background-add" class="form-label">Background</label>
         <textarea id="pg-background-add" class="form-control"></textarea>
       </div>
       <button type="submit" class="btn btn-primary">Aggiungi PG</button>
     </form>
+
+    <!-- Lista PG -->
+    <div id="pg-list" class="row g-3"></div>
 
     <!-- Form Modifica PG -->
     <div id="pg-edit-container" class="mb-4 d-none">
@@ -145,6 +158,16 @@
           <input type="text" id="pg-career-edit" class="form-control">
         </div>
         <div class="mb-3">
+          <label for="pg-divinita-edit" class="form-label">Divinità</label>
+          <select id="pg-divinita-edit" class="form-select">
+            <option value="Indiviso">Indiviso</option>
+            <option value="Khorne">Khorne</option>
+            <option value="Nurgle">Nurgle</option>
+            <option value="Slaanesh">Slaanesh</option>
+            <option value="Tzeentch">Tzeentch</option>
+          </select>
+        </div>
+        <div class="mb-3">
           <label for="pg-background-edit" class="form-label">Background</label>
           <textarea id="pg-background-edit" class="form-control"></textarea>
         </div>
@@ -152,10 +175,6 @@
         <button type="button" id="pg-edit-cancel" class="btn btn-secondary">Annulla</button>
       </form>
     </div>
-
-    <!-- Lista PG -->
-    <div id="pg-list" class="row g-3"></div>
-
 
     </main>
 

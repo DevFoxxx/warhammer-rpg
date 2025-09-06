@@ -7,11 +7,13 @@ async function loadPG() {
 
   pgList.forEach(pg => {
     const div = document.createElement('div');
-    div.className = "pg-card"; // usa la classe CSS
+    div.className = "pg-card"; 
+
     div.innerHTML = `
       <h3>${pg.nome}</h3>
       <p><strong>Archetipo:</strong> ${pg.archetype || '-'}</p>
       <p><strong>Specie:</strong> ${pg.career || '-'}</p>
+      <p><strong>Divinità:</strong> ${pg.divinita || 'Indiviso'}</p>
       <div class="pg-backstory">${pg.background || ''}</div>
     `;
     container.appendChild(div);
@@ -26,4 +28,3 @@ window.addEventListener('storage', (e) => {
         loadPG(); // ricarica i PG automaticamente
     }
 });
-

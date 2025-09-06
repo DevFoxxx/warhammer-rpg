@@ -470,9 +470,9 @@ p, li, span, label, input, textarea, dd {
 .pg-card {
   background-color: #1C2A44;
   border: 2px solid #FFD700;
+  height: fit-content;
   padding: 1rem;
   color: white;
-  font-family: 'Trajan Pro', serif;
   line-height: 1.5;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   width: 100%; /* per farle occupare tutta la colonna disponibile */
@@ -498,6 +498,13 @@ p, li, span, label, input, textarea, dd {
   white-space: normal;
   word-wrap: break-word;
   border-left: 3px solid #FFD700;
+}
+
+.pg-backstory.clean-backstory {
+  background-color: white;
+  color: black;
+  border-left: none;
+  padding: 0.5rem; /* opzionale per leggibilità */
 }
 
 /* Hover effetto leggero */

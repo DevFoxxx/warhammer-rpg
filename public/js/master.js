@@ -161,31 +161,121 @@ document.getElementById('campagnaId').addEventListener('change', e => loadSessio
 async function loadPG() {
   const list = document.getElementById('pg-list');
   list.innerHTML = '';
+
   try {
-    const res = await fetch('/pg', {
+    const headers = masterToken ? { 'Authorization': `Bearer ${masterToken}` } : {};
+    const res = await fetch('/pg', { headers });
+    if (!res.ok) {
+      if (res.status === 401) {
+        list.innerHTML = '<p class="text-muted">Accesso richiesto per caricare i PG.</p>';
+        return;
+      }
+      console.error('Errore fetch PG', res.status);
+      return;
+    }
+
+    const pgList = await res.json();
+
+    pgList.forEach(pg => {
+      const col = document.createElement('div');
+      col.className = "col-12 col-md-6 col-lg-4";
+
+      const card = document.createElement('div');
+      card.className = "card h-100 border-dark";
+      card.style.backgroundColor = 'white';
+      card.style.color = 'black';
+
+      const body = document.createElement('div');
+      body.className = 'card-body';
+
+      // Titolo
+      const title = document.createElement('h5');
+      title.className = 'card-title';
+      title.textContent = pg.nome || '—';
+
+      // Archetipo
+      const archetype = document.createElement('p');
+      archetype.innerHTML = `<strong>Archetipo:</strong> ${pg.archetype || '-'}`;
+
+      // Specie
+      const career = document.createElement('p');
+      career.innerHTML = `<strong>Specie:</strong> ${pg.career || '-'}`;
+
+      // Divinità
+      const divinita = document.createElement('p');
+      divinita.innerHTML = `<strong>Divinità:</strong> ${pg.divinita || 'Indiviso'}`;
+
+      // Backstory
+      const back = document.createElement('div');
+      back.className = 'pg-backstory clean-backstory';
+      back.textContent = pg.background || '';
+
+      // Bottoni
+      const btnGroup = document.createElement('div');
+      btnGroup.className = 'mt-2';
+
+      const editBtn = document.createElement('button');
+      editBtn.className = 'btn btn-warning btn-sm me-1';
+      editBtn.type = 'button';
+      editBtn.textContent = 'Modifica';
+      editBtn.addEventListener('click', () => startEditPG(pg)); // passiamo l'oggetto completo
+
+      const delBtn = document.createElement('button');
+      delBtn.className = 'btn btn-danger btn-sm';
+      delBtn.type = 'button';
+      delBtn.textContent = 'Elimina';
+      delBtn.addEventListener('click', () => deletePG(pg._id));
+
+      btnGroup.appendChild(editBtn);
+      btnGroup.appendChild(delBtn);
+
+      // Assemble card
+      body.appendChild(title);
+      body.appendChild(archetype);
+      body.appendChild(career);
+      body.appendChild(divinita); 
+      body.appendChild(back);
+      body.appendChild(btnGroup);
+      card.appendChild(body);
+      col.appendChild(card);
+      list.appendChild(col);
+    });
+
+  } catch (err) {
+    console.error('loadPG error', err);
+    list.innerHTML = '<p class="text-danger">Errore caricamento PG.</p>';
+  }
+}
+
+// startEditPG che riceve l'intero oggetto pg
+function startEditPG(pg) {
+  document.getElementById('pg-edit-container').classList.remove('d-none');
+  document.getElementById('pg-id-edit').value = pg._id || '';
+  document.getElementById('pg-nome-edit').value = pg.nome || '';
+  document.getElementById('pg-archetype-edit').value = pg.archetype || '';
+  document.getElementById('pg-career-edit').value = pg.career || '';
+  document.getElementById('pg-background-edit').value = pg.background || '';
+  document.getElementById('pg-divinita-edit').value = pg.divinita || 'Indiviso';
+}
+
+// ELIMINA PG (migliorata con controllo risposta)
+async function deletePG(id) {
+  if (!confirm('Sei sicuro di voler eliminare questo PG?')) return;
+  try {
+    const res = await fetch(`/pg/${id}`, {
+      method: 'DELETE',
       headers: { 'Authorization': `Bearer ${masterToken}` }
     });
-    const pgList = await res.json();
-    pgList.forEach(pg => {
-      const div = document.createElement('div');
-      div.className = "col-12 col-md-6 col-lg-4";
-      div.innerHTML = `
-        <div class="card h-100 border-dark" style="background-color:white; color:black;">
-          <div class="card-body">
-            <h5 class="card-title">${pg.nome}</h5>
-            <p><strong>Archetipo:</strong> ${pg.archetype || '-'}</p>
-            <p><strong>Specie:</strong> ${pg.career || '-'}</p>
-            <div class="pg-backstory" style="background-color: white; color: black; border-left: none;">${pg.background || ''}</div>
-            <div class="mt-2">
-              <button class="btn btn-warning btn-sm me-1" onclick="startEditPG('${pg._id}','${pg.nome}','${pg.archetype}','${pg.career}','${pg.background}')">Modifica</button>
-              <button class="btn btn-danger btn-sm" onclick="deletePG('${pg._id}')">Elimina</button>
-            </div>
-          </div>
-        </div>
-      `;
-      list.appendChild(div);
-    });
-  } catch (err) { console.error(err); }
+    const data = await res.json();
+    if (!res.ok) {
+      alert(data.error || 'Errore eliminazione');
+      return;
+    }
+    loadPG();
+  } catch (err) {
+    console.error(err);
+    alert('Errore eliminazione');
+  }
 }
 
 // AGGIUNGI PG
@@ -195,7 +285,8 @@ document.getElementById('pg-add-form').addEventListener('submit', async e => {
     nome: document.getElementById('pg-nome-add').value,
     archetype: document.getElementById('pg-archetype-add').value,
     career: document.getElementById('pg-career-add').value,
-    background: document.getElementById('pg-background-add').value
+    background: document.getElementById('pg-background-add').value,
+    divinita: document.getElementById('pg-divinita-add').value
   };
   try {
     const res = await fetch('/pg', {
@@ -214,16 +305,6 @@ document.getElementById('pg-add-form').addEventListener('submit', async e => {
   } catch (err) { alert(err.message); }
 });
 
-// INIZIA MODIFICA PG
-function startEditPG(id, nome, archetype, career, background) {
-  document.getElementById('pg-edit-container').classList.remove('d-none');
-  document.getElementById('pg-id-edit').value = id;
-  document.getElementById('pg-nome-edit').value = nome;
-  document.getElementById('pg-archetype-edit').value = archetype;
-  document.getElementById('pg-career-edit').value = career;
-  document.getElementById('pg-background-edit').value = background;
-}
-
 // CANCELLA MODIFICA
 document.getElementById('pg-edit-cancel').addEventListener('click', () => {
   document.getElementById('pg-edit-container').classList.add('d-none');
@@ -238,7 +319,8 @@ document.getElementById('pg-edit-form').addEventListener('submit', async e => {
     nome: document.getElementById('pg-nome-edit').value,
     archetype: document.getElementById('pg-archetype-edit').value,
     career: document.getElementById('pg-career-edit').value,
-    background: document.getElementById('pg-background-edit').value
+    background: document.getElementById('pg-background-edit').value,
+    divinita: document.getElementById('pg-divinita-edit').value
   };
   try {
     const res = await fetch(`/pg/${id}`, {
@@ -257,14 +339,6 @@ document.getElementById('pg-edit-form').addEventListener('submit', async e => {
     }
   } catch (err) { alert(err.message); }
 });
-
-// ELIMINA PG
-async function deletePG(id) {
-  if (confirm('Sei sicuro di voler eliminare questo PG?')) {
-    await fetch(`/pg/${id}`, { method: 'DELETE', headers: { 'Authorization': `Bearer ${masterToken}` } });
-    loadPG();
-  }
-}
 
 // CARICA PG all'inizio
 loadPG();
