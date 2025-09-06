@@ -287,6 +287,14 @@ p, li, span, label, input, textarea, dd {
 /* ---------------------------
    Sezione Master (login)
    --------------------------- */
+#login-container {
+  background-image: url("../images/warp.jpg");
+  background-size: cover;
+  background-position: bottom;
+  padding: 1.5rem;
+  color: #FFFFFF;
+}
+
 #login-container button {
   background-color: var(--gold);
   border: 1px solid var(--bg-dark);

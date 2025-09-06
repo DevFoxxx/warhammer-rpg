@@ -15,9 +15,15 @@ document.getElementById('login-form').addEventListener('submit', async e => {
     const data = await res.json();
     if (res.ok) {
       masterToken = data.token;
-      document.getElementById('login-container').classList.add('d-none');
+
+      // **Nascondi il login fullscreen**
+      document.getElementById('login-fullscreen').classList.add('d-none');
+
+      // Mostra il pannello master
       document.getElementById('master-panel').classList.remove('d-none');
       document.getElementById('master-name').textContent = `Master: ${username}`;
+
+      // Carica campagne e PG
       loadCampagne();
       loadPG();
     } else {
